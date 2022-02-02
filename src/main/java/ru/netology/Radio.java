@@ -60,5 +60,13 @@ public class Radio {
         }
     }
 
+    public void minusVolume() {
+        if (currentVolume <= 0) {
+            currentVolume = 0;
+        } else {
+            currentVolume = currentVolume - 1;
+        }
+
+    }
 
 }
