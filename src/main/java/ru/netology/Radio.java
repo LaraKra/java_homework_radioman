@@ -52,5 +52,13 @@ public class Radio {
 
     }
 
+    public void plusVolume() {
+        if (currentVolume >= 10) {
+            currentVolume = 10;
+        } else {
+            currentVolume = currentVolume + 1;
+        }
+    }
+
 
 }

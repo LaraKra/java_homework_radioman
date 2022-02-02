@@ -68,4 +68,21 @@ class RadioTest {
 
         assertEquals(expected, actual);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"'CurrentVolume equal ten ', 10, 10",
+            "'CurrentVolume more than ten', 11, 10",
+            "'CurrentVolume between zero and ten', 7, 8",
+            "'CurrentVolume equal zero', 0, 1"
+    })
+    void plusVolume(String testName, int setCurrentVolume, int expected) {
+        Radio rad = new Radio();
+        rad.setCurrentVolume(setCurrentVolume);
+        rad.plusVolume();
+
+        int actual = rad.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
 }
