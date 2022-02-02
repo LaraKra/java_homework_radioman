@@ -36,6 +36,20 @@ class RadioTest {
         int actual = rad.getCurrentStation();
 
         assertEquals(expected, actual);
+    }
 
+    @ParameterizedTest
+    @CsvSource(value = {"'CurrentStation equal nine', 9, 8",
+            "'CurrentStation between zero and nine', 6, 5",
+            "'CurrentStation equal zero', 0, 9"
+    })
+    void prevRadioStation(String testName, int setCurrentStation, int expected) {
+        Radio rad = new Radio();
+        rad.setCurrentStation(setCurrentStation);
+        rad.prevRadioStation();
+
+        int actual = rad.getCurrentStation();
+
+        assertEquals(expected, actual);
     }
 }

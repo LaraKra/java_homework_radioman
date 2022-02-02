@@ -28,5 +28,14 @@ public class Radio {
         }
     }
 
+    public void prevRadioStation() {
+        if (currentStation == 0) {
+            currentStation = 9;
+        } else {
+            currentStation = currentStation - 1;
+        }
+
+    }
+
 
 }
