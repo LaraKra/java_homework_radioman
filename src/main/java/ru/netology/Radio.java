@@ -19,4 +19,14 @@ public class Radio {
         this.currentStation = currentStation;
     }
 
+    public void nextRadioStation() {
+
+        if (currentStation == 9) {
+            currentStation = 0;
+        } else {
+            currentStation = currentStation + 1;
+        }
+    }
+
+
 }
