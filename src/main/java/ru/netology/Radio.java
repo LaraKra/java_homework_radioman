@@ -2,71 +2,107 @@ package ru.netology;
 
 public class Radio {
 
-    private int currentStation;
-    private int currentVolume;
+    private int countRadioBox = 10;
+    private int maxRadBox = calculateMaxRadBox();
+    private int minRadBox = 0;
+    private int currentRadBox = calculateCurrentRadBox();
+    private int maxRadVol = 100;
+    private int minRadVol = 0;
+    private int currentRadVolume = calculateCurrentRadVolume();
 
-    public int getCurrentStation() {
-        return currentStation;
+
+    public Radio(int countRadioBox) {
+        this.countRadioBox = countRadioBox;
+        this.maxRadBox = calculateMaxRadBox();
+        this.currentRadBox = calculateCurrentRadBox();
     }
 
-    public void setCurrentStation(int currentStation) {
-        if (currentStation > 9) {
+
+    public Radio() {
+        calculateMaxRadBox();
+    }
+
+
+    public int calculateMaxRadBox() {
+        return (countRadioBox - 1);
+    }
+
+    public int calculateCurrentRadBox() {
+        return ((maxRadBox + minRadBox) / 2);
+    }
+
+    public int calculateCurrentRadVolume() {
+        return ((maxRadVol + minRadVol) / 2);
+    }
+
+    public int getCountRadioBox() {
+        return countRadioBox;
+    }
+
+    public int getCurrentRadBox() {
+        return currentRadBox;
+    }
+
+    public void setCurrentRadBox(int currentRadBox) {
+        if (currentRadBox > maxRadBox) {
             return;
         }
-        if (currentStation < 0) {
+        if (currentRadBox < minRadBox) {
             return;
         }
-        this.currentStation = currentStation;
+        this.currentRadBox = currentRadBox;
     }
 
-    public void nextRadioStation() {
+    public void nextRadStat() {
 
-        if (currentStation == 9) {
-            currentStation = 0;
+        if (currentRadBox == maxRadBox) {
+            currentRadBox = minRadBox;
         } else {
-            currentStation = currentStation + 1;
+            currentRadBox = currentRadBox + 1;
         }
+
     }
 
-    public void prevRadioStation() {
-        if (currentStation == 0) {
-            currentStation = 9;
+    public void prevRadStat() {
+        if (currentRadBox == minRadBox) {
+            currentRadBox = maxRadBox;
         } else {
-            currentStation = currentStation - 1;
+            currentRadBox = currentRadBox - 1;
         }
-
     }
 
-    public int getCurrentVolume() {
-        return currentVolume;
+
+    public int getCurrentRadVolume() {
+        return currentRadVolume;
     }
 
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume > 10) {
-            currentVolume = 10;
+    public void setCurrentRadVolume(int currentRadVolume) {
+        if (currentRadVolume > maxRadVol) {
+            currentRadVolume = maxRadVol;
         }
-        if (currentVolume < 0) {
-            currentVolume = 0;
+        if (currentRadVolume < minRadVol) {
+            currentRadVolume = minRadVol;
         }
-        this.currentVolume = currentVolume;
+        this.currentRadVolume = currentRadVolume;
 
     }
 
     public void plusVolume() {
-        if (currentVolume >= 10) {
-            currentVolume = 10;
+        if (currentRadVolume >= maxRadVol) {
+            currentRadVolume = maxRadVol;
         } else {
-            currentVolume = currentVolume + 1;
+            currentRadVolume = currentRadVolume + 1;
         }
     }
 
-    public void minusVolume() {
-        if (currentVolume <= 0) {
-            currentVolume = 0;
+    public void minusRadVolume() {
+        if (currentRadVolume <= minRadVol) {
+            currentRadVolume = minRadVol;
         } else {
-            currentVolume = currentVolume - 1;
+            currentRadVolume = currentRadVolume - 1;
         }
 
     }
+
 
 }
