@@ -1,104 +1,124 @@
 package ru.netology;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
 
-    @ParameterizedTest
-    @CsvSource(value = {"'CurrentStation equal nine', 9, 9",
-            "'CurrentStation more than', 10, 0",
-            "'CurrentStation between zero and nine', 4, 4",
-            "'CurrentStation equal zero', 0, 0",
-            "'CurrentStation less than zero', -1, 0"
-    })
-    void currentRadio(String testName, int setCurrentStation, int expected) {
-        Radio rad = new Radio();
-        rad.setCurrentStation(setCurrentStation);
+    @Test
+    public void shouldUseConstructor() {
+        Radio radio = new Radio(15);
+        int actual = radio.getCountRadioBox();
+        int expected = 15;
+        assertEquals(actual, expected);
 
-        int actual = rad.getCurrentStation();
+    }
+
+    @Test
+    public void shouldUseConstructorForChangeRadBoxFrom20To15() {
+        Radio radio = new Radio(20);
+        radio.setCurrentRadBox(15);
+        int actual = radio.getCurrentRadBox();
+        int expected = 15;
+        assertEquals(actual, expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"'CurrentRadBox equal nine ', 9, 9",
+            "'CurrentRadBox more than nine', 10, 4",
+            "'CurrentRadBox between zero and nine', 4, 4",
+            "'CurrentRadBox equal zero', 0, 0",
+            "'CurrentRadBox less than zero', -1, 4"
+    })
+    void currentRadio(String testName, int setCurrentRadBox, int expected) {
+        Radio rad = new Radio();
+        rad.setCurrentRadBox(setCurrentRadBox);
+
+        int actual = rad.getCurrentRadBox();
 
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'CurrentStation equal nine', 9, 0",
-            "'CurrentStation between zero and nine', 3, 4",
-            "'CurrentStation equal zero', 0, 1"
+    @CsvSource(value = {"'CurrentRadBox equal nine', 9, 0",
+            "'CurrentRadBox between zero and nine', 3, 4",
+            "'CurrentRadBox  equal zero', 0, 1"
     })
-    void nextRadioStation(String testName, int setCurrentStation, int expected) {
+    void nextRadStat(String testName, int setCurrentRadBox, int expected) {
         Radio rad = new Radio();
-        rad.setCurrentStation(setCurrentStation);
-        rad.nextRadioStation();
+        rad.setCurrentRadBox(setCurrentRadBox);
+        rad.nextRadStat();
 
-        int actual = rad.getCurrentStation();
+        int actual = rad.getCurrentRadBox();
 
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'CurrentStation equal nine', 9, 8",
-            "'CurrentStation between zero and nine', 6, 5",
-            "'CurrentStation equal zero', 0, 9"
+    @CsvSource(value = {"'CurrentRadBox equal nine', 9, 8",
+            "'CurrentRadBox between zero and nine', 6, 5",
+            "'CurrentRadBox  equal zero', 0, 9"
     })
-    void prevRadioStation(String testName, int setCurrentStation, int expected) {
+    void prevRadStat(String testName, int setCurrentRadBox, int expected) {
         Radio rad = new Radio();
-        rad.setCurrentStation(setCurrentStation);
-        rad.prevRadioStation();
+        rad.setCurrentRadBox(setCurrentRadBox);
+        rad.prevRadStat();
 
-        int actual = rad.getCurrentStation();
+        int actual = rad.getCurrentRadBox();
 
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'CurrentVolume equal ten', 10, 10",
-            "'CurrentVolume more than ten', 11, 10",
-            "'CurrentVolume between zero and ten', 4, 4",
-            "'CurrentVolume equal zero', 0, 0",
-            "'CurrentVolume less than zero', -1, 0"
+    @CsvSource(value = {"'CurrentRadVolume equal hundred ', 100, 100",
+            "'CurrentRadVolume more than hundred', 101, 100",
+            "'CurrentRadVolume between zero and hundred', 60, 60",
+            "'CurrentRadVolume equal zero', 0, 0",
+            "'CurrentRadVolume less than zero', -1, 0"
     })
-    void radVolume(String testName, int setCurrentVolume, int expected) {
+    void radVolume(String testName, int setCurrentRadVolume, int expected) {
         Radio rad = new Radio();
-        rad.setCurrentVolume(setCurrentVolume);
+        rad.setCurrentRadVolume(setCurrentRadVolume);
 
-        int actual = rad.getCurrentVolume();
+        int actual = rad.getCurrentRadVolume();
 
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'CurrentVolume equal ten ', 10, 10",
-            "'CurrentVolume more than ten', 11, 10",
-            "'CurrentVolume between zero and ten', 7, 8",
-            "'CurrentVolume equal zero', 0, 1"
+    @CsvSource(value = {"'CurrentRadVolume equal hundred ', 100, 100",
+            "'CurrentRadVolume more than hundred', 101, 100",
+            "'CurrentRadVolume between zero and hundred', 55, 56",
+            "'CurrentRadVolume equal zero', 0, 1"
     })
-    void plusVolume(String testName, int setCurrentVolume, int expected) {
+    void plusVolume(String testName, int currentRadVolume, int expected) {
         Radio rad = new Radio();
-        rad.setCurrentVolume(setCurrentVolume);
+        rad.setCurrentRadVolume(currentRadVolume);
         rad.plusVolume();
 
-        int actual = rad.getCurrentVolume();
+        int actual = rad.getCurrentRadVolume();
 
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"'CurrentVolume equal ten ', 10, 9",
-            "'CurrentVolume between zero and ten', 5, 4",
-            "'CurrentVolume equal zero', 0, 0",
-            "'CurrentVolume less than zero', -1, 0"
+    @CsvSource(value = {"'CurrentRadVolume equal hundred ', 100, 99",
+            "'CurrentRadVolume between zero and hundred', 50, 49",
+            "'CurrentRadVolume equal zero', 0, 0",
+            "'CurrentRadVolume less than zero', -1, 0"
     })
-    void minusVolume(String testName, int setCurrentVolume, int expected) {
+    void minusVolume(String testName, int setCurrentRadVolume, int expected) {
         Radio rad = new Radio();
-        rad.setCurrentVolume(setCurrentVolume);
-        rad.minusVolume();
+        rad.setCurrentRadVolume(setCurrentRadVolume);
+        rad.minusRadVolume();
 
-        int actual = rad.getCurrentVolume();
+        int actual = rad.getCurrentRadVolume();
 
         assertEquals(expected, actual);
     }
+
 
 }
